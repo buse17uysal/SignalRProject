@@ -1,0 +1,125 @@
+﻿<div class="sidebar">
+	<div class="scrollbar-inner sidebar-wrapper">
+		<div class="user">
+			<div class="photo">
+				<img src="~/Ready-Bootstrap-Dashboard-master/assets/img/profile.jpg">
+			</div>
+			<div class="info">
+				<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+					<span>
+						SignalR Yönetim Paneli
+						<span class="user-level">Admin</span>
+						<span class="caret"></span>
+					</span>
+				</a>
+				<div class="clearfix"></div>
+
+				<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+					<ul class="nav">
+						<li>
+							<a href="#profile">
+								<span class="link-collapse">Menüyü Gör</span>
+							</a>
+						</li>
+						<li>
+							<a href="#edit">
+								<span class="link-collapse"> Şifreyi Değiştir</span>
+							</a>
+						</li>
+						<li>
+							<a href="#settings">
+								<span class="link-collapse">Ayarlar</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<ul class="nav">
+			<li class="nav-item">
+				<a href="index.html">
+					<i class="la la-dashboard"></i>
+					<p>Dashboard</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="components.html">
+					<i class="la la-book"></i>
+					<p>Menüyü Gör</p>
+				</a>
+			</li>
+			<li class="nav-item  @ViewBag.ActiveCategory">
+				<a href="/Category/Index/">
+					<i class="la la-outdent"></i>
+					<p>Kategoriler</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.ActiveProduct">
+				<a href="/Product/Index/">
+					<i class="la la-cutlery"></i>
+					<p>Ürünler</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="notifications.html">
+					<i class="la la-bookmark"></i>
+					<p>Rezevasyonlar</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.ActiveAbout">
+				<a href="/About/Index/">
+					<i class="la la-info"></i>
+					<p>Hakkımızda</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-envelope"></i>
+					<p>Mesajlar</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-long-arrow-down"></i>
+					<p>İndirimler</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-star-o"></i>
+					<p>Öne Çıkanlar</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-users"></i>
+					<p>Referanslar</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-globe"></i>
+					<p>Sosyal Medya</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-bar-chart"></i>
+					<p>İstatistikler</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-cog"></i>
+					<p>Ayarlar</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="icons.html">
+					<i class="la la-sign-out"></i>
+					<p>Çıkış Yap</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
