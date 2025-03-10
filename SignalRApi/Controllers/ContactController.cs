@@ -20,7 +20,7 @@ namespace SignalRApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public IActionResult contactList()
+        public IActionResult ContactList()
         {
             var value = _mapper.Map<List<ResultContactDto>>(_contactService.TGetListAll());
             return Ok(value);
