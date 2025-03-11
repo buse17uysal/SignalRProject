@@ -37,14 +37,14 @@ namespace SignalRApi.Controllers
             });
             return Ok("İletişim Bilgisi Eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
             _discountService.TDelete(value);
             return Ok("İletişim Bilgisi Silindi");
         }
-        [HttpGet("GetDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
