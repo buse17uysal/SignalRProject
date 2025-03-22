@@ -6,6 +6,7 @@ using SignalR.DataAccessLayer.EntitiyFramework;
 using SignalR.DataAccessLayer.EntityFramework;
 using SignalRApi.Hubs;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,12 @@ builder.Services.AddScoped<IMenuTableDal, EFMenuTableDal>();
 
 builder.Services.AddScoped<ISliderService, SliderManager>();
 builder.Services.AddScoped<ISliderDal, EFSliderDal>();
+
+builder.Services.AddScoped<IBasketServivce, BasketManager>();
+builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
 // Add services to the container.
