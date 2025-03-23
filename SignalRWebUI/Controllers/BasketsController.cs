@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SignalRWebUI.Dtos.BasketDtos;
 using SignalRWebUI.Dtos.BookingDtos;
 using System.Net.Http;
+using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
@@ -17,7 +18,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44321/api/Basket?id=4");
+            var responseMessage = await client.GetAsync("https://localhost:44321/api/Basket/BasketListByMenuTableWithProductName?id=4");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
