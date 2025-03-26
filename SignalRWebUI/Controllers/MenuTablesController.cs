@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUI.Dtos.NotificationDtos;
+using SignalRWebUI.Dtos.MenuTableDtos;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
-    public class NotificationsController : Controller
+    public class MenuTablesController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public NotificationsController(IHttpClientFactory httpClientFactory)
+        public MenuTablesController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -17,27 +17,28 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44321/api/Notification");
+            var responseMessage = await client.GetAsync("https://localhost:44321/api/MenuTables");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultNotificationDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultMenuTableDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
         [HttpGet]
-        public IActionResult CreateNotification()
+        public IActionResult CreateMenuTable()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNotification(CreateNotificationDto createNotificationDto)
+        public async Task<IActionResult> CreateMenuTable(CreateMenuTableDto createMenuTableDto)
         {
+            createMenuTableDto.Status = false;
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createNotificationDto);
+            var jsonData = JsonConvert.SerializeObject(createMenuTableDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:44321/api/Notification", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:44321/api/MenuTables", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -47,10 +48,10 @@ namespace SignalRWebUI.Controllers
                 return View();
             }
         }
-        public async Task<IActionResult> DeleteNotification(int id)
+        public async Task<IActionResult> DeleteMenuTable(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:44321/api/Notification/{id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:44321/api/MenuTables/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -60,14 +61,14 @@ namespace SignalRWebUI.Controllers
                 return View();
             }
         }
-        public async Task<IActionResult> UpdateNotification(int id)
+        public async Task<IActionResult> UpdateMenuTable(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:44321/api/Notification/{id}");
+            var responseMessage = await client.GetAsync($"https://localhost:44321/api/MenuTables/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateNotificationDto>(jsonData);
+                var values = JsonConvert.DeserializeObject<UpdateMenuTableDto>(jsonData);
                 return View(values);
             }
             else
@@ -76,12 +77,12 @@ namespace SignalRWebUI.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateNotification(UpdateNotificationDto updateNotificationDto)
+        public async Task<IActionResult> UpdateMenuTable(UpdateMenuTableDto updateMenuTableDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateNotificationDto);
+            var jsonData = JsonConvert.SerializeObject(updateMenuTableDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:44321/api/Notification/", stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:44321/api/MenuTables/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -91,17 +92,19 @@ namespace SignalRWebUI.Controllers
                 return View();
             }
         }
-        public async Task<IActionResult> NotificationStatusChangeToTrue(int id)
+
+        [HttpGet]
+        public async Task<IActionResult> TableListByStatus()
         {
             var client = _httpClientFactory.CreateClient();
-           await client.GetAsync($"https://localhost:44321/api/Notification/NotificationStatusChangeToTrue/{id}");
-            return RedirectToAction("Index");
-        }
-        public async Task<IActionResult> NotificationStatusChangeToFalse(int id)
-        {
-            var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:44321/api/Notification/NotificationStatusChangeToFalse/{id}");
-            return RedirectToAction("Index");
+            var responseMessage = await client.GetAsync("https://localhost:44321/api/MenuTables");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultMenuTableDto>>(jsonData);
+                return View(values);
+            }
+            return View();
         }
     }
 }
