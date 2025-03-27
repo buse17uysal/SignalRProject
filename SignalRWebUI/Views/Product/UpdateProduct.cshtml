@@ -4,7 +4,6 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-
 <div class="content">
     <div class="container-fluid">
         <h4 class="page-title">Ürün İşlemleri</h4>
@@ -13,7 +12,7 @@
                 <form method="post">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Ürün  Güncelleme Sayfası</div>
+                            <div class="card-title">Ürün Güncelleme Sayfası</div>
                         </div>
                         <input type="hidden" asp-for="ProductID" />
                         <div class="card-body">
@@ -36,8 +35,18 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="price">Ürün Kategorisini Seçiniz</label>
-                                @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+                                <label for="category">Ürün Kategorisini Seçiniz</label>
+                                @Html.DropDownListFor(model => model.CategoryID,
+                                         ViewBag.Categories as List<SelectListItem>,
+                                         new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="status">Ürün Durumunu Seçiniz</label>
+                                @Html.DropDownListFor(model => model.ProductStatus,
+                                         ViewBag.ProductStatuses as List<SelectListItem>,
+                                         new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="card-body">
@@ -55,5 +64,3 @@
         </div>
     </div>
 </div>
-
-

@@ -12,6 +12,8 @@
         ViewBag.ActiveProduct = "";
     }
     int count = 0;
+    string status="";
+    string color="";
 }
 
 <div class="content">
@@ -31,6 +33,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Ürün Resmi</th>
                                     <th scope="col">Ürün Adı</th>
                                     <th scope="col">Fiyat</th>
                                     <th scope="col">Kategori</th>
@@ -42,13 +45,24 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    if(item.ProductStatus==true)
+                                    {
+                                        status = "Var";
+                                        color = "success";
+                                    }
+                                    else
+                                    {
+                                        status = "Yok";
+                                        color = "danger";
+                                    }
                                     count++;
                                     <tr>
-                                        <td>@count</td>
+                                        <th>@count</th>
+                                        <td><img src="@item.ImageUrl" style="height:80px;width:120px" /></td>
                                         <td>@item.ProductName</td>
                                         <td>@item.Price</td>
                                         <td>@item.CategoryName</td>
-                                        <td>@item.ProductStatus</td>
+                                        <td class="text-@color">@status</td>
                                         <td><a href="/Product/DeleteProduct/@item.ProductID" class="btn btn-outline-danger">Sil</a></td>
                                         <td><a href="/Product/UpdateProduct/@item.ProductID" class="btn btn-outline-success">Güncelle</a></td>
                                     </tr>
