@@ -34,6 +34,7 @@ namespace SignalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Description = "Rezervasyon Alındı";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -55,11 +56,11 @@ namespace SignalRWebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View();
-            }
+
+            return View();
+
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateBooking(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -70,10 +71,8 @@ namespace SignalRWebUI.Controllers
                 var values = JsonConvert.DeserializeObject<UpdateBookingDto>(jsonData);
                 return View(values);
             }
-            else
-            {
-                return View();
-            }
+            return View();
+
         }
         [HttpPost]
         public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
@@ -86,10 +85,22 @@ namespace SignalRWebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View();
-            }
+            return View();
+
         }
+        public async Task<IActionResult> BookingStatusApproved(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:44321/api/Booking/BookingStatusApproved/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> BookingStatusCancelled(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:44321/api/Booking/BookingStatusCancelled/{id}");
+            return RedirectToAction("Index");
+        }
+
     }
 }

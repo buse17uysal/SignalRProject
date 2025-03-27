@@ -1,4 +1,6 @@
-﻿namespace SignalRWebUI.Dtos.ProductDtos
+﻿using SignalRWebUI.Dtos.CategoryDtos;
+
+namespace SignalRWebUI.Dtos.ProductDtos
 {
     public class ResultProductWithCategory
     {
@@ -9,5 +11,7 @@
         public string ImageUrl { get; set; }
         public bool ProductStatus { get; set; }
         public string CategoryName { get; set; }
+        public ResultCategoryDto Category { get; set; }
+
     }
 }
