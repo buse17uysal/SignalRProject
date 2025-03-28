@@ -23,13 +23,12 @@
 
             <ul class="filters_menu">
                 <li class="active" data-filter="*">Tümü</li>
-                <li data-filter=".Hamburger">Hamburger</li>
-                <li data-filter=".Makarna">Makarna</li>
-                <li data-filter=".Salata">Salata</li>
-                <li data-filter=".Tatlı">Tatlı</li>
-                <li data-filter=".İçecek">İçecek</li>
+                @foreach (var category in Model.Select(x => x.CategoryName).Distinct())
+                {
+                    <li data-filter=".@category.Replace(" ", "-")">@category</li>
+                }
             </ul>
-
+            
             <div class="filters-content">
                 <div class="row grid">
                     @foreach (var item in Model)
@@ -112,11 +111,6 @@
                         </div>
                     }
                 </div>
-            </div>
-            <div class="btn-box">
-                <a href="">
-                    Daha Fazlasını Gör
-                </a>
             </div>
         </div>
     </section>
