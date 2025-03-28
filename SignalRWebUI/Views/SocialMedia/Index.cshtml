@@ -31,8 +31,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">İkon</th>
                                     <th scope="col">Başlık</th>
-                                    <th scope="col">Link</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
                                 </tr>
@@ -40,11 +40,18 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    var iconClass = item.Icon;
+                                    {
+                                        if (iconClass.Contains("fa fa-"))
+                                        {
+                                            iconClass = iconClass.Replace("fa fa-", "la la-");
+                                        }
+                                    }
                                     count++;
                                     <tr>
-                                        <td>@count</td>
+                                        <th>@count</th>
+                                        <td><i class="@iconClass la-3x"></i></td>
                                         <td>@item.Title</td>
-                                        <td>@item.Url</td>
                                         <td><a href="/SocialMedia/DeleteSocialMedia/@item.SocialMediaID" class="btn btn-outline-danger">Sil</a></td>
                                         <td><a href="/SocialMedia/UpdateSocialMedia/@item.SocialMediaID" class="btn btn-outline-success">Güncelle</a></td>
                                     </tr>

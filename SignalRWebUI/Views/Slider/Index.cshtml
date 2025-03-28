@@ -1,15 +1,15 @@
-﻿@model List<ResultFeatureDto>
+﻿@model List<ResultSliderDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 
     if (ViewData["Title"]?.ToString() == "Index")
     {
-        ViewBag.ActiveFeature = "active";
+        ViewBag.ActiveSlider = "active";
     }
     else
     {
-        ViewBag.ActiveFeature= "";
+        ViewBag.ActiveSlider = "";
     }
     int count = 0;
 }
@@ -26,6 +26,7 @@
                     <div class="card-body">
                         <div class="card-sub">
                             Ana Sayfada Öne Çıkan Alan ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz!
+                            <strong>Lütfen sadece bir tane öne çıkan ekleyin!</strong>
                         </div>
                         <table class="table mt-3">
                             <thead>
@@ -53,13 +54,13 @@
                                         <td>@item.Description1</td>
                                         <td>@item.Description2</td>
                                         <td>@item.Description3</td>
-                                        <td><a href="/Feature/DeleteFeature/@item.FeatureID" class="btn btn-outline-danger">Sil</a></td>
-                                        <td><a href="/Feature/UpdateFeature/@item.FeatureID" class="btn btn-outline-success">Güncelle</a></td>
+                                        <td><a href="/Slider/DeleteSlider/@item.SliderID" class="btn btn-outline-danger">Sil</a></td>
+                                        <td><a href="/Slider/UpdateSlider/@item.SliderID" class="btn btn-outline-success">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/Feature/CreateFeature/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan Girişi</a>
+                        <a href="/Slider/CreateSlider/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan Girişi</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+
+    if (ViewData["Title"]?.ToString() == "Index")
+    {
+        ViewBag.ActiveProgress = "active";
+    }
+    else
+    {
+        ViewBag.ActiveProgress = "";
+    }
 }
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

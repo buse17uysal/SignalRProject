@@ -13,6 +13,9 @@
         ViewBag.ActiveNotification = "";
     }
     int count = 0;
+    string word = "";
+    string color = "";
+    string newdate = "";
 }
 
 
@@ -45,18 +48,43 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    TimeSpan timeDiff = DateTime.Now - item.Date;
+                                    if (timeDiff.TotalMinutes < 60)
+                                    {
+                                        newdate = $"{(int)timeDiff.TotalMinutes} dakika önce";
+                                    }
+                                    else if (timeDiff.TotalHours < 24)
+                                    {
+                                        newdate = $"{(int)timeDiff.TotalHours} saat önce";
+                                    }
+                                    else
+                                    {
+                                        newdate = $"{(int)timeDiff.TotalDays} gün önce";
+                                    }
+
+                                    if (item.Status == true)
+                                    {
+                                        word = "Okundu";
+                                        color = "success";
+                                    }
+                                    else
+                                    {
+                                        word = "Okunmadı";
+                                        color = "danger";
+                                    }
                                     count++;
                                     <tr>
-                                        <td>@count</td>
+                                        <th>@count</th>
                                         <td>@item.Description</td>
-                                        <td>@item.Date</td>
-                                        <td>@item.Status</td>
+                                        <td>@newdate</td>
+                                        <td class="text-@color">@word</td>
                                         <td><a href="/Notifications/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger">Sil</a></td>
                                         <td><a href="/Notifications/UpdateNotification/@item.NotificationID" class="btn btn-outline-success">Güncelle</a></td>
                                         <td><a href="/Notifications/NotificationStatusChangeToTrue/@item.NotificationID" class="btn btn-outline-warning">Okundu</a></td>
                                         <td><a href="/Notifications/NotificationStatusChangeToFalse/@item.NotificationID" class="btn btn-outline-secondary">Okunmadı</a></td>
                                     </tr>
                                 }
+
                             </tbody>
                         </table>
                         <a href="/Notifications/CreateNotification/" class="btn btn-outline-primary">Yeni Bildirim Girişi</a>

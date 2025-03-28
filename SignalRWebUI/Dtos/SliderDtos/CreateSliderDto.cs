@@ -1,8 +1,8 @@
-﻿namespace SignalRWebUI.Dtos.FeatureDtos
+﻿namespace SignalRWebUI.Dtos.SliderDtos
 {
-    public class ResultFeatureDto
+    public class CreateSliderDto
     {
-        public int FeatureID { get; set; }
+        public int SliderID { get; set; }
         public string Title1 { get; set; }
         public string Description1 { get; set; }
         public string Title2 { get; set; }

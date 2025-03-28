@@ -36,7 +36,7 @@ namespace SignalRApi.Controllers
         {
             Notification notification = new Notification()
             {
-                Date = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
+                Date = Convert.ToDateTime(DateTime.Now.ToLongTimeString()),
                 Description = createNotificationDto.Description,
                 Icon = createNotificationDto.Icon,
                 Status = false,

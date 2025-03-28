@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using SignalR.DtoLayer.FeatureDto;
+using SignalR.DtoLayer.SliderDto;
 using SignalR.EntityLayer.Entities;
 
 namespace SignalRApi.Mapping
 {
-    public class FeatureMapping : Profile
+    public class SliderMapping : Profile
     {
-        public FeatureMapping()
+        public SliderMapping()
         {
-            CreateMap<Feature, ResultFeatureDto>().ReverseMap();
-            CreateMap<Feature, CreateFeatureDto>().ReverseMap();
-            CreateMap<Feature, GetFeatureDto>().ReverseMap();
-            CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
+            CreateMap<Slider, ResultSliderDto>().ReverseMap();
+            CreateMap<Slider, CreateSliderDto>().ReverseMap();
+            CreateMap<Slider, GetSliderDto>().ReverseMap();
+            CreateMap<Slider, UpdateSliderDto>().ReverseMap();
         }
     }
 }
