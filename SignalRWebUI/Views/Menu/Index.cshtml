@@ -1,7 +1,19 @@
 ﻿@model List<ResultProductWithCategory>
 @{
     Layout = null;
+
+    string layoutValue = ViewData["Layout"] as string ?? "";
+
+    if (string.IsNullOrEmpty(layoutValue) || layoutValue.Equals("null", StringComparison.OrdinalIgnoreCase))
+    {
+        ViewBag.ActiveMenu = "active";
+    }
+    else
+    {
+        ViewBag.ActiveMenu = "";
+    }
 }
+
 
 <!DOCTYPE html>
 <html>

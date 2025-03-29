@@ -1,6 +1,18 @@
 ﻿@model CreateBookingDto
 @{
+
     Layout = null;
+
+    string layoutValue = ViewData["Layout"] as string ?? "";
+
+    if (string.IsNullOrEmpty(layoutValue) || layoutValue.Equals("null", StringComparison.OrdinalIgnoreCase))
+    {
+        ViewBag.ActiveBook = "active";
+    }
+    else
+    {
+        ViewBag.ActiveBook = "";
+    }
 }
 
 <!DOCTYPE html>
