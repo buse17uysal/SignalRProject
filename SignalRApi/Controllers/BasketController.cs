@@ -45,6 +45,7 @@ namespace SignalRApi.Controllers
         public IActionResult CreateBasket(CreateBasketDto createBasketDto)
         {
             using var context = new SignalRContext();
+
             _basketServivce.TAdd(new Basket()
             {
                 ProductID = createBasketDto.ProductID,
