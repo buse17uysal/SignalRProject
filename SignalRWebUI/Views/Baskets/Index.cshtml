@@ -51,7 +51,7 @@
                         var itemCount = group.Count();
 
                         basketTotalPrice = Model.Sum(x => x.Price);
-                        tax = basketTotalPrice  / 10;
+                        tax = basketTotalPrice  / 100;
                         basketTotalPriceWithTax = basketTotalPrice+tax;
                         count++;
                         item.TotalPrice=item.Price*itemCount;
