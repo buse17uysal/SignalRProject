@@ -1,6 +1,6 @@
 ﻿namespace SignalR.DtoLayer.SliderDto
 {
-    public class GetSliderDto
+    public class GetFeatureDto
     {
         public int SliderID { get; set; }
         public string Title1 { get; set; }
@@ -9,5 +9,8 @@
         public string Description2 { get; set; }
         public string Title3 { get; set; }
         public string Description3 { get; set; }
+        public string Image1 { get; set; }
+        public string Image2 { get; set; }
+        public string Image3 { get; set; }
     }
 }

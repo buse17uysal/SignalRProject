@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult SliderList()
         {
-            var value = _mapper.Map<List<ResultSliderDto>>(_sliderService.TGetListAll());
+            var value = _mapper.Map<List<ResultFeatureDto>>(_sliderService.TGetListAll());
             return Ok(value);
         }
         [HttpPost]
@@ -36,6 +36,9 @@ namespace SignalRApi.Controllers
                 Title1 = createSliderDto.Title1,
                 Title2 = createSliderDto.Title2,
                 Title3 = createSliderDto.Title3,
+                Image1 = createSliderDto.Image1,
+                Image2 = createSliderDto.Image2,
+                Image3 = createSliderDto.Image3,
             });
             return Ok("Öne Çıkan Bilgisi Eklendi");
         }
@@ -53,7 +56,7 @@ namespace SignalRApi.Controllers
             return Ok(value);
         }
         [HttpPut]
-        public IActionResult UpdateSlider(UpdateSliderDto updateSliderDto)
+        public IActionResult UpdateSlider(UpdateFeatureDto updateSliderDto)
         {
             _sliderService.TUpdate(new Slider()
             {
@@ -63,7 +66,10 @@ namespace SignalRApi.Controllers
                 Title1 = updateSliderDto.Title1,
                 Title2 = updateSliderDto.Title2,
                 Title3 = updateSliderDto.Title3,
-                SliderID = updateSliderDto.SliderID
+                SliderID = updateSliderDto.SliderID,
+                Image1 = updateSliderDto.Image1,
+                Image2 = updateSliderDto.Image2,
+                Image3 = updateSliderDto.Image3,
             });
             return Ok("Öne Çıkan Bilgisi Güncellendi");
         }
