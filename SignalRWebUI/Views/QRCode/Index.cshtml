@@ -1,6 +1,15 @@
 ﻿﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+
+    if (ViewData["Title"]?.ToString() == "Index")
+    {
+        ViewBag.ActiveQR = "active";
+    }
+    else
+    {
+        ViewBag.ActiveQR = "";
+    }
 }
 
 <div class="content">
