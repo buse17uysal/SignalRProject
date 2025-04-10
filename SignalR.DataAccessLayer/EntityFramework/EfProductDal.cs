@@ -71,5 +71,47 @@ namespace SignalR.DataAccessLayer.EntitiyFramework
             return context.Products.Where(x=>x.CategoryID==(context.Categories.Where(y=>y.CategoryName=="Hamburger")
             .Select(z=>z.CategoryID).FirstOrDefault())).Average(w=>w.Price);
         }
+
+        public decimal ProductPriceByPizza()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Pizza")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
+
+        public decimal ProductPriceByPasta()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Makarna")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
+
+        public decimal ProductPriceBySalad()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Salata")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
+
+        public decimal ProductPriceByDessert()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Tatlı")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
+
+        public decimal ProductPriceByDrink()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "İçecek")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
+
+        public decimal ProductPriceByFrying()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Kızartmalar")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
     }
 }

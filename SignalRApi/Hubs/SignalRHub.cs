@@ -75,6 +75,7 @@ namespace SignalRApi.Hubs
         }
         public async Task SendProgress()
         {
+
             var value = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value.ToString("0.00") + "₺");
 
@@ -83,6 +84,37 @@ namespace SignalRApi.Hubs
 
             var value3 = _menuTableService.TMenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableCount", value3);
+
+            var value5 = _productService.TProductPriceAvg().ToString("0");
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", value5);
+
+            var value6 = _productService.TProductAvgPriceByHamburger().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByHamburger", value6);
+
+            var value7 = _productService.TProductCountByCategoryNameDrink();
+            await Clients.All.SendAsync("ReceiveDrink", value7);
+
+            var value8 = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", value8);
+
+            var value9 = _productService.TProductPriceByPizza().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByPizza", value9); 
+            
+            var value10 = _productService.TProductPriceByPasta().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByPasta", value10);
+             
+            var value11 = _productService.TProductPriceByDessert().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByDessert", value11);
+             
+            var value12 = _productService.TProductPriceByFrying().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByFrying", value12);
+             
+            var value13 = _productService.TProductPriceByDrink().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceByDrink", value13);
+             
+            var value14 = _productService.TProductPriceBySalad().ToString("0");
+            await Clients.All.SendAsync("ReceiveAvgPriceBySalad", value14);
+
         }
         public async Task GetBookingList()
         {
@@ -95,16 +127,16 @@ namespace SignalRApi.Hubs
             await Clients.All.SendAsync("ReceiveNotificationCountByFalse", value);
 
             var notificationlistbyfalse = _notificationService.TGetAllNotificationByFalse();
-            await Clients.All.SendAsync("ReceiveNotificationListByFalse",notificationlistbyfalse);
+            await Clients.All.SendAsync("ReceiveNotificationListByFalse", notificationlistbyfalse);
         }
         public async Task GetMenuTableStatus()
         {
             var value = _menuTableService.TGetListAll();
             await Clients.All.SendAsync("ReceiveMenuTableStatus", value);
         }
-        public async Task SendMessage(string user,string message)
+        public async Task SendMessage(string user, string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user,message);
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
         public override async Task OnConnectedAsync()
         {

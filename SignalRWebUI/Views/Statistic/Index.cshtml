@@ -56,9 +56,14 @@
                   connection.on("ReceiveProductCountByCategoryNameDrink",(value6)=>{
                     $("#productcountbycategorynamedrink").text(value6);
                 });
-                  connection.on("ReceiveProductPriceAvg",(value7)=>{
-                    $("#productriceavg").text(value7);
-                });
+                let lastAvgPrice = null;
+                  connection.on("ReceiveProductPriceAvg", (value7) => {
+                    if (lastAvgPrice !== value7) {
+                    $("#productpriceavg").text(value7);
+                    lastAvgPrice = value7;
+                }
+            });
+
                  connection.on("ReceiveProductNameByMaxPrice",(value8)=>{
                     $("#maxpriceproduct").text(value8);
                 });
@@ -220,7 +225,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Ortalama Fiyat</p>
-                                    <h4 class="card-title" id="productriceavg"></h4>
+                                    <h4 class="card-title" id="productpriceavg"></h4>
                                 </div>
                             </div>
                         </div>
