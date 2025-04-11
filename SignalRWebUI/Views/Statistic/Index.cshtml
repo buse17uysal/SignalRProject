@@ -85,9 +85,9 @@
                 connection.on("ReceiveTotalMoneyCaseAmount",(value14)=>{
                     $("#totalmoneycaseamount").text(value14);
                 });
-
-
-
+                connection.on("ReceiveTodayTotalPrice",(value15)=>{
+                    $("#todaytotalprice").text(value15);
+                });
                 connection.on("ReceiveMenuTableCount",(value16)=>{
                     $("#tablecount").text(value16);
                 });
@@ -381,7 +381,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Bugünkü Kazanç</p>
-                                    <h4 class="card-title">125.45₺</h4>
+                                    <h4 class="card-title" id="todaytotalprice"></h4>
                                 </div>
                             </div>
                         </div>

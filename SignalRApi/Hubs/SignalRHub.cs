@@ -68,7 +68,8 @@ namespace SignalRApi.Hubs
             var value14 = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value14.ToString("0.00") + "₺");
 
-
+            var value15 = _orderService.TTodayTotalPrice();
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", value15.ToString("0.00") + "₺");
 
             var value16 = _menuTableService.TMenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableCount", value16);
@@ -129,6 +130,9 @@ namespace SignalRApi.Hubs
 
             var value19 = _orderService.TLastOrderPrice();
             await Clients.All.SendAsync("ReceiveLastOrderPrice", value19.ToString("0.00") + "₺");
+
+            var value20 = _orderService.TTodayTotalPrice();
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", value20.ToString("0.00") + "₺");
 
 
         }
