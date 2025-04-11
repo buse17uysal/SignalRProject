@@ -22,6 +22,11 @@ namespace SignalRApi.Controllers
             var values = _bookingService.TGetListAll();
             return Ok(values);
         }
+        [HttpGet("BookingCount")]
+        public IActionResult BookingCount()
+        {
+            return Ok(_bookingService.TBookingCount());
+        }
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
