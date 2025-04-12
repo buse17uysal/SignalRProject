@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ContactDto;
@@ -28,48 +27,29 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult Createcontact(CreateContactDto createcontactDto)
         {
-            _contactService.TAdd(new Contact()
-            {
-                FooterDescripton = createcontactDto.FooterDescripton,
-                Location = createcontactDto.Location,
-                Mail = createcontactDto.Mail,
-                Phone = createcontactDto.Phone,
-                FooterTitle=createcontactDto.FooterTitle,
-                OpenDays=createcontactDto.OpenDays,
-                OpenHours=createcontactDto.OpenHours,
-                OpenDaysDescription=createcontactDto.OpenDaysDescription,
-            });
-            return Ok("İndirim Bilgisi Eklendi");
+            var value = _mapper.Map<Contact>(createcontactDto);
+            _contactService.TAdd(value);
+            return Ok("İletişim Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
         public IActionResult Deletecontact(int id)
         {
             var value = _contactService.TGetByID(id);
             _contactService.TDelete(value);
-            return Ok("İndirim Bilgisi Silindi");
+            return Ok("İletişim Bilgisi Silindi");
         }
         [HttpGet("{id}")]
         public IActionResult GetContact(int id)
         {
             var value = _contactService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetContactDto>(value));
         }
         [HttpPut]
         public IActionResult Updatecontact(UpdateContactDto updatecontactDto)
         {
-            _contactService.TUpdate(new Contact()
-            {
-                ContactID = updatecontactDto.ContactID,
-                FooterDescripton = updatecontactDto.FooterDescripton,
-                Location = updatecontactDto.Location,
-                Mail = updatecontactDto.Mail,
-                Phone = updatecontactDto.Phone,
-                FooterTitle = updatecontactDto.FooterTitle,
-                OpenDays = updatecontactDto.OpenDays,
-                OpenHours = updatecontactDto.OpenHours,
-                OpenDaysDescription=updatecontactDto.OpenDaysDescription,
-            });
-            return Ok("İndirim Bilgisi Güncellendi");
+            var value = _mapper.Map<Contact>(updatecontactDto);
+            _contactService.TUpdate(value);
+            return Ok("İletişim Bilgisi Güncellendi");
         }
     }
 }

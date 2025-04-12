@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.AboutDto;
@@ -11,28 +11,24 @@ namespace SignalRApi.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutSevice;
+        private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutSevice)
+        public AboutController(IAboutService aboutSevice, IMapper mapper)
         {
             _aboutSevice = aboutSevice;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult AboutList()
         {
             var values = _aboutSevice.TGetListAll();
-            return Ok(values);
-
+            return Ok(_mapper.Map<List<ResultAboutDto>>(values));
         }
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            About about = new About()
-            {
-                Title = createAboutDto.Title,
-                Description = createAboutDto.Description,
-                ImageUrl = createAboutDto.ImageUrl,
-            };
-            _aboutSevice.TAdd(about);
+            var value = _mapper.Map<About>(createAboutDto);
+            _aboutSevice.TAdd(value);
             return Ok("Hakkımda KısmıBaşarılı Bir Şekilde Eklendi");
         }
         [HttpDelete("{id}")]
@@ -45,21 +41,15 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            About about = new About()
-            {
-                AboutID = updateAboutDto.AboutID,
-                Title = updateAboutDto.Title,
-                Description = updateAboutDto.Description,
-                ImageUrl = updateAboutDto.ImageUrl,
-            };
-            _aboutSevice.TUpdate(about);
+            var value = _mapper.Map<About>(updateAboutDto);
+            _aboutSevice.TUpdate(value);
             return Ok("Hakkımda Alanı Güncellendi");
         }
         [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutSevice.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetAboutDto>(value));
         }
     }
 }

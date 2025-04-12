@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.DiscountDto;
@@ -28,14 +27,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto creatediscountDto)
         {
-            _discountService.TAdd(new Discount()
-            {
-                Amount = creatediscountDto.Amount,
-                Description = creatediscountDto.Description,
-                ImageUrl = creatediscountDto.ImageUrl,
-                Title = creatediscountDto.Title,
-                Status =false,
-            });
+            var value = _mapper.Map<Discount>(creatediscountDto);
+            _discountService.TAdd(value);
             return Ok("İletişim Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -49,20 +42,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetDiscountDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updatediscountDto)
         {
-            _discountService.TUpdate(new Discount()
-            {
-                Amount = updatediscountDto.Amount,
-                Description = updatediscountDto.Description,
-                ImageUrl = updatediscountDto.ImageUrl,
-                Title = updatediscountDto.Title,
-                DiscountID=updatediscountDto.DiscountID,
-                Status=updatediscountDto.Status,
-            });
+            var value = _mapper.Map<Discount>(updatediscountDto);
+            _discountService.TUpdate(value);
             return Ok("İletişim Bilgisi Güncellendi");
         }
         [HttpGet("ChangeStatusToTrue/{id}")]
@@ -71,13 +57,11 @@ namespace SignalRApi.Controllers
             _discountService.TChangeStatusToTrue(id);
             return Ok("Ürün İndirimi Aktif Hale Getirildi");
         }
-
         [HttpGet("ChangeStatusToFalse/{id}")]
         public IActionResult ChangeStatusToFalse(int id)
         {
             _discountService.TChangeStatusToFalse(id);
             return Ok("Ürün İndirimi Pasif Hale Getirildi");
         }
-
     }
 }
