@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.SliderDto;
@@ -22,24 +21,14 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult SliderList()
         {
-            var value = _mapper.Map<List<ResultFeatureDto>>(_sliderService.TGetListAll());
+            var value = _mapper.Map<List<ResultSliderDto>>(_sliderService.TGetListAll());
             return Ok(value);
         }
         [HttpPost]
         public IActionResult CreateSlider(CreateSliderDto createSliderDto)
         {
-            _sliderService.TAdd(new Slider()
-            {
-                Description1 = createSliderDto.Description1,
-                Description2 = createSliderDto.Description2,
-                Description3 = createSliderDto.Description3,
-                Title1 = createSliderDto.Title1,
-                Title2 = createSliderDto.Title2,
-                Title3 = createSliderDto.Title3,
-                Image1 = createSliderDto.Image1,
-                Image2 = createSliderDto.Image2,
-                Image3 = createSliderDto.Image3,
-            });
+            var value = _mapper.Map<Slider>(createSliderDto);
+            _sliderService.TAdd(value);
             return Ok("Öne Çıkan Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -53,24 +42,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetSlider(int id)
         {
             var value = _sliderService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetSliderDto>(value));
         }
         [HttpPut]
-        public IActionResult UpdateSlider(UpdateFeatureDto updateSliderDto)
+        public IActionResult UpdateSlider(UpdateSliderDto updateSliderDto)
         {
-            _sliderService.TUpdate(new Slider()
-            {
-                Description1 = updateSliderDto.Description1,
-                Description2 = updateSliderDto.Description2,
-                Description3 = updateSliderDto.Description3,
-                Title1 = updateSliderDto.Title1,
-                Title2 = updateSliderDto.Title2,
-                Title3 = updateSliderDto.Title3,
-                SliderID = updateSliderDto.SliderID,
-                Image1 = updateSliderDto.Image1,
-                Image2 = updateSliderDto.Image2,
-                Image3 = updateSliderDto.Image3,
-            });
+            var value = _mapper.Map<Slider>(updateSliderDto);
+            _sliderService.TUpdate(value);
             return Ok("Öne Çıkan Bilgisi Güncellendi");
         }
     }

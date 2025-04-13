@@ -12,7 +12,6 @@ namespace SignalRApi.Controllers
     {
         private readonly IMenuTableService _menuTableService;
         private readonly IMapper _mapper;
-
         public MenuTablesController(IMenuTableService menuTableService, IMapper mapper)
         {
             _menuTableService = menuTableService;
@@ -23,7 +22,6 @@ namespace SignalRApi.Controllers
         {
             return Ok(_menuTableService.TMenuTableCount());
         }
-        //burası çalışmıyor bak
         [HttpGet]
         public IActionResult MenuTableList()
         {
@@ -50,7 +48,7 @@ namespace SignalRApi.Controllers
         {
             var value = _mapper.Map<MenuTable>(updateMenuTableDto);
             _menuTableService.TUpdate(value);
-            return Ok("Masa Güncellendi");
+            return Ok("Masa Bilgisi Güncellendi");
         }
         [HttpGet("{id}")]
         public IActionResult GetMenuTable(int id)

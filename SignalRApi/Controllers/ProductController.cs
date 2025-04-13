@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SignalR.BusinessLayer.Abstract;
@@ -27,85 +26,71 @@ namespace SignalRApi.Controllers
             var value = _mapper.Map<List<ResultProductDto>>(_productService.TGetListAll());
             return Ok(value);
         }
-
         [HttpGet("ProductCount")]
         public IActionResult ProductCount()
         {
             return Ok(_productService.TProductCount());
         }
-
         [HttpGet("ProductNameByMaxPrice")]
         public IActionResult ProductNameByMaxPrice()
         {
             return Ok(_productService.TProductNameByMaxPrice());
         }
-
         [HttpGet("ProductNameByMinPrice")]
         public IActionResult ProductNameByMinPrice()
         {
             return Ok(_productService.TProductNameByMinPrice());
         }
-
         [HttpGet("ProductAvgPriceByHamburger")]
         public IActionResult ProductAvgPriceByHamburger()
         {
             return Ok(_productService.TProductAvgPriceByHamburger());
         }
-
         [HttpGet("ProductCountByHamburger")]
         public IActionResult ProductCountByHamburger()
         {
             return Ok(_productService.TProductCountByCategoryNameHamburger());
         }
-        
         [HttpGet("ProductPriceByPizza")]
         public IActionResult ProductPriceByPizza()
         {
             return Ok(_productService.TProductPriceByPizza());
-        }
-        
+        }      
         [HttpGet("ProductPriceByPasta")]
         public IActionResult ProductPriceByPasta()
         {
             return Ok(_productService.TProductPriceByPasta());
         }
-
         [HttpGet("ProductPriceBySalad")]
         public IActionResult ProductPriceBySalad()
         {
             return Ok(_productService.TProductPriceBySalad());
-        }
-        
+        }    
         [HttpGet("ProductPriceByDessert")]
         public IActionResult ProductPriceByDessert()
         {
             return Ok(_productService.TProductPriceByDessert());
-        }
-        
+        }       
         [HttpGet("ProductPriceByFrying")]
         public IActionResult ProductPriceByFrying()
         {
             return Ok(_productService.TProductPriceByFrying());
-        }
-        
+        }       
         [HttpGet("ProductPriceByDrink")]
         public IActionResult ProductPriceByDrink()
         {
             return Ok(_productService.TProductPriceByDrink());
-        }
-        
+        }     
         [HttpGet("ProductCountByDrink")]
         public IActionResult ProductCountByDrink()
         {
             return Ok(_productService.TProductCountByCategoryNameDrink());
         }
-
         [HttpGet("ProductPriceAvg")]
         public IActionResult ProductPriceAvg()
         {
             return Ok(_productService.TProductPriceAvg());
         }
-
         [HttpGet("ProductListWithCategory")]
         public IActionResult ProductListWithCategory(int id)
         {
@@ -123,19 +108,11 @@ namespace SignalRApi.Controllers
             }).ToList();
             return Ok(values.ToList());
         }
-
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            _productService.TAdd(new Product()
-            {
-                Description = createProductDto.Description,
-                ImageUrl = createProductDto.ImageUrl,
-                Price = createProductDto.Price,
-                ProductName = createProductDto.ProductName,
-                ProductStatus = createProductDto.ProductStatus,
-                CategoryID=createProductDto.CategoryID,
-            });
+            var value = _mapper.Map<Product>(createProductDto);
+            _productService.TAdd(value);
             return Ok("Ürün Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -149,21 +126,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetProductDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            _productService.TUpdate(new Product()
-            {
-                Description = updateProductDto.Description,
-                ImageUrl = updateProductDto.ImageUrl,
-                Price = updateProductDto.Price,
-                ProductName = updateProductDto.ProductName,
-                ProductStatus = updateProductDto.ProductStatus,
-                ProductID = updateProductDto.ProductID,
-                CategoryID=updateProductDto.CategoryID,
-            });
+            var value = _mapper.Map<Product>(updateProductDto);
+            _productService.TUpdate(value);
             return Ok("Ürün Bilgisi Güncellendi");
         }
     }

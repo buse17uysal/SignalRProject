@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.TestimonialDto;
@@ -28,15 +27,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult Createtestimonial(CreateTestimonialDto createtestimonialDto)
         {
-            _testimonialService.TAdd(new Testimonial()
-            {
-                Comment = createtestimonialDto.Comment,
-                ImageUrl = createtestimonialDto.ImageUrl,
-                Name = createtestimonialDto.Name,
-                Status = createtestimonialDto.Status,
-                Title = createtestimonialDto.Title,
-
-            });
+            var value = _mapper.Map<Testimonial>(createtestimonialDto);
+            _testimonialService.TAdd(value);
             return Ok("Müşteri Yorum Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -50,20 +42,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetTestimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetTestimonialDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updatetestimonialDto)
         {
-            _testimonialService.TUpdate(new Testimonial()
-            {
-                Comment = updatetestimonialDto.Comment,
-                ImageUrl = updatetestimonialDto.ImageUrl,
-                Name = updatetestimonialDto.Name,
-                Status = updatetestimonialDto.Status,
-                Title = updatetestimonialDto.Title,
-                TestimonialID = updatetestimonialDto.TestimonialID,
-            });
+            var value = _mapper.Map<Testimonial>(updatetestimonialDto);
+            _testimonialService.TUpdate(value);
             return Ok("Müşteri Yorum Bilgisi Güncellendi");
         }
     }

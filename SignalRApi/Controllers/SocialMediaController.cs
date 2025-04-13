@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.SocialMediaDto;
@@ -28,12 +27,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateSocialmedia(CreateSocialMediaDto createsocialmediaDto)
         {
-            _socialmediaService.TAdd(new SocialMedia()
-            {
-                Icon = createsocialmediaDto.Icon,
-                Title = createsocialmediaDto.Title,
-                Url = createsocialmediaDto.Url,
-            });
+            var value = _mapper.Map<SocialMedia>(createsocialmediaDto);
+            _socialmediaService.TAdd(value); 
             return Ok("Sosyal Medya Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -47,18 +42,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetSocialmedia(int id)
         {
             var value = _socialmediaService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetSocialMediaDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateSocialmedia(UpdateSocialMediaDto updatesocialmediaDto)
         {
-            _socialmediaService.TUpdate(new SocialMedia()
-            {
-                Icon = updatesocialmediaDto.Icon,
-                Title = updatesocialmediaDto.Title,
-                Url = updatesocialmediaDto.Url,
-                SocialMediaID = updatesocialmediaDto.SocialMediaID,
-            });
+            var value = _mapper.Map<SocialMedia>(updatesocialmediaDto);
+            _socialmediaService.TUpdate(value);
             return Ok("Sosyal Medya Bilgisi Güncellendi");
         }
     }

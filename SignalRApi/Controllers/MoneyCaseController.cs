@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 
 namespace SignalRApi.Controllers
@@ -14,7 +13,6 @@ namespace SignalRApi.Controllers
         {
             _moneyCaseService = moneyCaseService;
         }
-
         [HttpGet]
         public IActionResult TotalMoneyCaseAmount()
         {

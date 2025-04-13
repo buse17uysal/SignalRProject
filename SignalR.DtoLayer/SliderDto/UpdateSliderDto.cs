@@ -1,6 +1,6 @@
 ﻿namespace SignalR.DtoLayer.SliderDto
 {
-    public class UpdateFeatureDto
+    public class UpdateSliderDto
     {
         public int SliderID { get; set; }
         public string Title1 { get; set; }
