@@ -2,8 +2,8 @@
 @{
     Layout = null;
     int count = 0;
-    decimal basketTotalPrice=0;
-    decimal basketTotalPriceWithTax=0;
+    decimal basketTotalPrice = 0;
+    decimal basketTotalPriceWithTax = 0;
     decimal tax = 0;
 }
 
@@ -45,16 +45,16 @@
                             <th>Sil</th>
                         </tr>
                     </thead>
-                    @foreach (var group in Model.GroupBy(x=>x.ProductName))
+                    @foreach (var group in Model.GroupBy(x => x.ProductName))
                     {
                         var item = group.First();
                         var itemCount = group.Count();
 
                         basketTotalPrice = Model.Sum(x => x.Price);
-                        tax = basketTotalPrice  / 100;
-                        basketTotalPriceWithTax = basketTotalPrice+tax;
+                        tax = basketTotalPrice / 100;
+                        basketTotalPriceWithTax = basketTotalPrice + tax;
                         count++;
-                        item.TotalPrice=item.Price*itemCount;
+                        item.TotalPrice = item.Price * itemCount;
                         <tbody class="align-middle">
                             <tr>
                                 <td class="align-middle">@count</td>

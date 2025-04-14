@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.EntityLayer.Entities;
 using SignalRWebUI.Dtos.BasketDtos;
 using SignalRWebUI.Dtos.ProductDtos;
 using System.Text;
@@ -16,8 +17,9 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            ViewBag.v = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:44321/api/Product/ProductListWithCategory");
             if (responseMessage.IsSuccessStatusCode)
@@ -33,36 +35,32 @@ namespace SignalRWebUI.Controllers
         {
             try
             {
-                // HttpClient oluşturulur
+                if (createBasketDto == null || createBasketDto.MenuTableID == 0)
+                {
+                    return BadRequest("Geçersiz veri");
+                }
+
                 using var client = _httpClientFactory.CreateClient();
-
-                // createBasketDto JSON formatına dönüştürülür
                 var jsonData = JsonConvert.SerializeObject(createBasketDto);
-
-                // StringContent oluşturulur, JSON veriyi içerir
                 var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                // API'ye POST isteği gönderilir
                 var responseMessage = await client.PostAsync("https://localhost:44321/api/Basket", stringContent);
 
-                // İsteğin başarılı olup olmadığı kontrol edilir
+                var client2 = _httpClientFactory.CreateClient();
+                await client2.GetAsync("https://localhost:44321/api/MenuTables/ChangeMenuTableStatusToTrue?id=" + createBasketDto.MenuTableID);
+
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    // Başarılıysa, Index sayfasına yönlendirilir
-                    return RedirectToAction("Index");
+                    return Ok(new { success = true, message = "Ürün sepete eklendi." });
                 }
                 else
                 {
-                    // Başarısızsa, hata mesajı döndürülür
-                    return Json(new { error = false, message = "Sepete ekleme başarısız oldu." });
+                    return BadRequest("API'ye gönderim başarısız.");
                 }
             }
             catch (Exception ex)
             {
-                // İstek sırasında bir hata oluştuğunda, hata mesajını döndür
-                return Json(new { error = true, message = ex.Message });
+                return BadRequest($"Hata oluştu: {ex.Message}");
             }
         }
-
     }
 }
