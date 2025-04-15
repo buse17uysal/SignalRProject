@@ -12,16 +12,16 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class BasketController : ControllerBase
     {
-        private readonly IBasketServivce _basketServivce;
+        private readonly IBasketServivce _basketService;
 
         public BasketController(IBasketServivce basketServivce)
         {
-            _basketServivce = basketServivce;
+            _basketService = basketServivce;
         }
         [HttpGet]
         public IActionResult GetBasketByMenuTableID(int id)
         {
-            var values = _basketServivce.TGetBasketByMenuTableNumber(id);
+            var values = _basketService.TGetBasketByMenuTableNumber(id);
             return Ok(values);
         }
         [HttpGet("BasketListByMenuTableWithProductName")]
@@ -31,11 +31,11 @@ namespace SignalRApi.Controllers
             var values = context.Baskets.Include(x => x.Product).Where(y => y.MenuTableID == id).Select(z => new ResultBasketListWithProduct
             {
                 BasketID = z.BasketID,
-                Count=z.Count,
-                MenuTableID=z.MenuTableID,
+                Count = z.Count,
+                MenuTableID = z.MenuTableID,
                 Price = z.Price,
                 ProductID = z.ProductID,
-                ProductName=z.Product.ProductName,
+                ProductName = z.Product.ProductName,
                 TotalPrice = z.TotalPrice,
             }).ToList();
             return Ok(values);
@@ -46,7 +46,7 @@ namespace SignalRApi.Controllers
 
             using var context = new SignalRContext();
 
-            _basketServivce.TAdd(new Basket()
+            _basketService.TAdd(new Basket()
             {
                 ProductID = createBasketDto.ProductID,
                 Count = createBasketDto.Count,
@@ -59,8 +59,8 @@ namespace SignalRApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBasket(int id)
         {
-            var value = _basketServivce.TGetByID(id);
-            _basketServivce.TDelete(value);
+            var value = _basketService.TGetByID(id);
+            _basketService.TDelete(value);
             return Ok("Sepetteki Seçilen Ürün Silindi");
         }
     }

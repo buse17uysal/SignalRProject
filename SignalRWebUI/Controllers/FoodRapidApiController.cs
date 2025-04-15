@@ -5,9 +5,9 @@ using SignalRWebUI.Dtos.RapidApiDtos;
 
 namespace SignalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class FoodRapidApiController : Controller
     {
-        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var client = new HttpClient();

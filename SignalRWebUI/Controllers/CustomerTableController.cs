@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.MenuTableDtos;
 
 namespace SignalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class CustomerTableController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
