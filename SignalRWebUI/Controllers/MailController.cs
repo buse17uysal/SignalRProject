@@ -3,7 +3,6 @@ using MimeKit;
 using SignalRWebUI.Dtos.MailDtos;
 using MailKit.Net.Smtp;
 
-
 namespace SignalRWebUI.Controllers
 {
     public class MailController : Controller

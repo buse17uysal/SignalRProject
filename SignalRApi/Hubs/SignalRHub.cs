@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
-using SignalR.DataAccessLayer.Concrete;
 
 namespace SignalRApi.Hubs
 {
@@ -76,7 +75,6 @@ namespace SignalRApi.Hubs
         }
         public async Task SendProgress()
         {
-
             var value = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value.ToString("0.00") + "₺");
 
@@ -133,8 +131,6 @@ namespace SignalRApi.Hubs
 
             var value20 = _orderService.TTodayTotalPrice();
             await Clients.All.SendAsync("ReceiveTodayTotalPrice", value20.ToString("0.00") + "₺");
-
-
         }
         public async Task GetBookingList()
         {

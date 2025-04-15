@@ -1,11 +1,6 @@
 ﻿using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Concrete
 {
@@ -39,27 +34,27 @@ namespace SignalR.BusinessLayer.Concrete
 
         void IGenericService<Order>.TAdd(Order entity)
         {
-            throw new NotImplementedException();
+            _orderDal.Add(entity);
         }
 
         void IGenericService<Order>.TDelete(Order entity)
         {
-            throw new NotImplementedException();
+            _orderDal.Delete(entity);
         }
 
         Order IGenericService<Order>.TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _orderDal.GetByID(id);
         }
 
         List<Order> IGenericService<Order>.TGetListAll()
         {
-            throw new NotImplementedException();
+            return _orderDal.GetListAll();
         }
 
         void IGenericService<Order>.TUpdate(Order entity)
         {
-            throw new NotImplementedException();
+            _orderDal.Update(entity);
         }
     }
 }

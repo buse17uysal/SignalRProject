@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.BookingDtos;
 using System.Text;
@@ -102,6 +101,5 @@ namespace SignalRWebUI.Controllers
             await client.GetAsync($"https://localhost:44321/api/Booking/BookingStatusCancelled/{id}");
             return RedirectToAction("Index");
         }
-
     }
 }

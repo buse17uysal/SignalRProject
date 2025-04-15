@@ -6,7 +6,6 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
     public class _DefaultTestimonialComponentPartial : ViewComponent
     {
-
         private readonly IHttpClientFactory _httpClientFactory;
 
         public _DefaultTestimonialComponentPartial(IHttpClientFactory httpClientFactory)

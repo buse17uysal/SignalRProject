@@ -76,15 +76,12 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> UpdateProduct(int id)
         {
             var client = _httpClientFactory.CreateClient();
-
-            // Kategorileri API'den çek
             var responseCategory = await client.GetAsync("https://localhost:44321/api/Category");
             if (responseCategory.IsSuccessStatusCode)
             {
                 var jsonCategory = await responseCategory.Content.ReadAsStringAsync();
                 var categories = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonCategory);
 
-                // Kategorileri ViewBag'e atıyoruz
                 ViewBag.Categories = categories.Select(x => new SelectListItem
                 {
                     Text = x.CategoryName,
@@ -92,14 +89,12 @@ namespace SignalRWebUI.Controllers
                 }).ToList();
             }
 
-            // Ürün Durumu Listesi (Sabit Değerler)
             ViewBag.ProductStatuses = new List<SelectListItem>
     {
         new SelectListItem { Text = "Var", Value = "True" },
         new SelectListItem { Text = "Yok", Value = "False" }
     };
 
-            // Ürünü API'den çek
             var responseProduct = await client.GetAsync($"https://localhost:44321/api/Product/{id}");
             if (responseProduct.IsSuccessStatusCode)
             {

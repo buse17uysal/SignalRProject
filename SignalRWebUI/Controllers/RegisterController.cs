@@ -20,7 +20,6 @@ namespace SignalRWebUI.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Index(RegisterDto registerDto)
         {

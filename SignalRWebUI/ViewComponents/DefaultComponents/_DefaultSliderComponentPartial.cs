@@ -6,7 +6,6 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
     public class _DefaultSliderComponentPartial:ViewComponent
     {
-
         private readonly IHttpClientFactory _httpClientFactory;
 
         public _DefaultSliderComponentPartial(IHttpClientFactory httpClientFactory)
