@@ -5,7 +5,7 @@ Bu proje, Murat Yücedağ'ın Udemy'de bulunan "Asp.Net Core Api SignalR ile QR 
 
 ## 🚀 Proje Özellikleri  
 
-### **Kullanıcı Arayüzü**  
+### **Restoran Arayüzü**  
 Admin paneli ve SignalR sayesinde dinamik bir şekilde güncellenebilir bilgiler ile kullanıcı dostu bir arayüz tasarlanmıştır.
 - Slider ve görsellerle bilgilendirici açıklamalar
 - İndirimler
