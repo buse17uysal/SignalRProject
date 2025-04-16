@@ -56,7 +56,9 @@ Admin paneli, restoranımızı yönetmek için kapsamlı bir kontrol sağlar. Pa
 - **HTML, CSS, Bootstrap:** Kullanıcı arayüzü için modern ve duyarlı tasarım.  
 - **JavaScript:** Arayüzdeki dinamik etkileşimler için kullanılmıştır.  
 - **SignalR:** Dinamik verilerin anlık görüntülenmesinde kullanılmıştır.
-- **Swagger:** API işlemlerinde kullanılmıştır.  
+- **Swagger:** API işlemlerinde kullanılmıştır.
+- **FluentValidation:** Veri doğrulama işlemlerinde kullanılmıştır.  
+
 
 
 ## 📸 Ekran Görüntüleri  
