@@ -63,7 +63,7 @@ Admin paneli, restoranımızı yönetmek için kapsamlı bir kontrol sağlar. Pa
 
 ## 📸 Ekran Görüntüleri  
 
-### Kullanıcı Arayüzü  
+### Restoran Arayüzü  
 ![](SignalRWebUI/EkranGoruntuleri/localhost_7088_Default_Index.png)
 ![](SignalRWebUI/EkranGoruntuleri/localhost_7088_Menu_Index_.png)
 ![](SignalRWebUI/EkranGoruntuleri/localhost_7088_CustomerTable_CustomerTableList_.png)
